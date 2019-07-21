@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Arbol</title>
+    <script src="jquery-2.js"></script>
+    <script src="vis.js"></script>
+    <link rel="stylesheet" href="vis-network.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    Neuronas de entrada: <input type="text" name="Nentrada" id="Nentrada">
+    Neuronas por Nivel: <input type="text" name="NporNivel" id="NporNivel">
+    Neuronas de Salida: <input type="text" name="Nsalida" id="Nsalida">
+    <input type="button" value="Crear" onClick="CrearRed()">
+    <button onclick="enviar()">Entrenar</button>
+    <br>
+    alto sepalo: <input type="text" id="altoSepalo">
+    ancho sepalo: <input type="text"  id="anchoSepalo">
+    alto petalo: <input type="text"  id="altoPetalo">
+    ancho petalo: <input type="text"  id="anchoPetalo">
+    <button onclick="enviar2()">Testear</button>
+    <div id="visualization"></div>
+    <script type="text/javascript" src="visualization.js"></script>
+</body>
+</html>

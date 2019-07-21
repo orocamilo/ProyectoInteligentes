@@ -1,0 +1,80 @@
+select * from "Iris" where validacion=10;
+
+create or replace function agrupar()
+returns integer
+as
+$BODY$
+declare
+	grupos integer := 10;--numero de grupos en que se dividira
+    registros integer := (select count (*) from "Iris");--total registros bd
+	grupo integer := registros/grupos;--numero de registros por grupo
+	grupoFor integer:=grupo;-- para controlar el for
+	numero integer:=1;
+	cursorRegistros CURSOR FOR select * from "Iris" order by id asc for update;
+	registro "Iris"%ROWTYPE;
+	identificador "Iris".id%TYPE;
+
+begin
+	for registro in cursorRegistros loop
+	identificador:=registro.id;
+		if grupoFor > 0 then			
+			UPDATE "Iris" SET "validacion" = (numero) WHERE CURRENT OF cursorRegistros;
+			grupoFor:= grupoFor-1;
+		else 
+			grupoFor:=grupo-1;
+			numero:=numero+1;
+			UPDATE "Iris" SET "validacion" = (numero) WHERE CURRENT OF cursorRegistros;
+       end if;
+    end loop;
+	return 0;
+end; 
+$BODY$
+LANGUAGE 'plpgsql' VOLATILE;
+
+select * from agrupar();
+select * from "Iris" order by id asc;
+select * from "Iris" where validacion=10;
+
+
+update "Iris" set ("validacion") = row (1);
+
+
+
+
+
+
+select  count (distinct (validacion)) from "Iris";
+
+
+create or replace function validacion_cruzada(grupo_prueba integer)
+returns integer
+as
+$BODY$
+declare
+	grupos integer := 10;--numero de grupos en que se dividira
+    registros integer := (select count (*) from "Iris");--total registros bd
+	grupo integer := registros/grupos;--numero de registros por grupo
+	grupoFor integer:=grupo;-- para controlar el for
+	numero integer:=1;
+	cursorRegistros CURSOR FOR select * from "Iris" order by id asc for update;
+	registro "Iris"%ROWTYPE;
+	identificador "Iris".id%TYPE;
+
+begin
+	for registro in cursorRegistros loop
+	identificador:=registro.id;
+		if grupoFor > 0 then			
+			UPDATE "Iris" SET "validacion" = (numero) WHERE CURRENT OF cursorRegistros;
+			grupoFor:= grupoFor-1;
+		else 
+			grupoFor:=grupo-1;
+			numero:=numero+1;
+			UPDATE "Iris" SET "validacion" = (numero) WHERE CURRENT OF cursorRegistros;
+       end if;
+    end loop;
+	return 0;
+end; 
+$BODY$
+LANGUAGE 'plpgsql' VOLATILE;
+
+

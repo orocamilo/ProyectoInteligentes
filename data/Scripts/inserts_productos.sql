@@ -1,0 +1,17 @@
+﻿insert into productos(nombre) values ('Huevos');
+insert into productos(nombre) values ('Arepas');
+insert into productos(nombre) values ('Mantequilla');
+insert into productos(nombre) values ('Chocolate');
+insert into productos(nombre) values ('Pan');
+insert into productos(nombre) values ('Cereales');
+insert into productos(nombre) values ('Café');
+insert into productos(nombre) values ('Leche');
+insert into productos(nombre) values ('Tocino');
+insert into productos(nombre) values ('Changua');
+insert into productos(nombre) values ('Tamal');
+insert into productos(nombre) values ('Papas');
+insert into productos(nombre) values ('Calentado');
+insert into productos(nombre) values ('Yuca frita');
+insert into productos(nombre) values ('Jugo Naranja');
+insert into productos(nombre) values ('Yogurth');
+insert into productos(nombre) values ('Pollo');

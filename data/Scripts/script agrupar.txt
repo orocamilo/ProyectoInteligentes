@@ -1,0 +1,55 @@
+create or replace function agrupar()
+returns integer
+as
+$BODY$
+declare
+	grupos integer := 10;--numero de grupos en que se dividira
+    registros integer := (select count (*) from "Iris");--total registros bd
+	grupo integer := registros/grupos;--numero de registros por grupo
+	grupoFor integer:=grupo;-- para controlar el for
+	numero integer:=1;
+	cursorRegistros CURSOR FOR select * from "Iris" order by id asc for update;
+	registro "Iris"%ROWTYPE;
+	identificador "Iris".id%TYPE;
+
+begin
+RAISE NOTICE ' grupo  %', grupo;
+RAISE NOTICE ' grupofor  %', grupoFor;
+RAISE NOTICE ' numero  %', numero;
+	for registro in cursorRegistros loop
+	identificador:=registro.id;
+	RAISE NOTICE ' id  %', identificador;
+		if grupoFor > 0 then
+			registro.validacion:=(numero);
+			--update "Iris" set ("validacion") = row (numero) where id = identificacdor;
+			UPDATE "Iris" SET "validacion" = (numero) WHERE CURRENT OF cursorRegistros;
+
+			RAISE NOTICE ' validacion  %', registro.validacion;
+			grupoFor:= grupoFor-1;
+			RAISE NOTICE ' resta  %', grupoFor;
+		else 
+			grupoFor:=grupo;
+			numero:=numero+1;
+			registro.validacion:=(numero);
+			--update "Iris" set ("validacion") = row (numero) where id = identificacdor;
+			UPDATE "Iris" SET "validacion" = (numero) WHERE CURRENT OF cursorRegistros;
+			RAISE NOTICE ' validacion2  %', registro.validacion;
+			RAISE NOTICE ' grupoFor2  %', grupoFor;
+       end if;
+    end loop;
+	return 0;
+end; 
+$BODY$
+LANGUAGE 'plpgsql' VOLATILE;
+
+
+update "Iris" set ("validacion") = row (1);
+
+select  * from "Iris";
+delete from "Iris";
+
+select * from agrupar();
+drop function agrupar;
+select * from "Iris2";
+insert into "Iris2"  (select * from "Iris");
+CREATE TABLE "Iris2" AS SELECT "Iris";

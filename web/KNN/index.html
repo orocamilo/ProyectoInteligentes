@@ -1,0 +1,426 @@
+﻿<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	
+	<!-- start: Meta -->
+	<meta charset="utf-8">
+	<title>Regresión Lineal</title>
+	<meta name="description" content="ACME Dashboard Bootstrap Admin Template.">
+	<meta name="author" content="Łukasz Holeczek">
+	<meta name="keyword" content="ACME, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+	<!-- end: Meta -->
+	
+	<!-- start: Mobile Specific -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- end: Mobile Specific -->
+	
+	<!-- start: CSS -->
+	<link href="index_data/bootstrap.css" rel="stylesheet">
+	<link href="index_data/style.css" rel="stylesheet">
+	<link href="index_data/retina.css" rel="stylesheet">
+	<!-- end: CSS -->
+
+	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+		<link href="assets/css/ie.css" rel="stylesheet">
+	<![endif]-->
+	
+	<!--[if IE 9]>
+		<link id="ie9style" href="assets/css/ie9.css" rel="stylesheet">
+	<![endif]-->
+	
+	<!-- start: Favicon and Touch Icons -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://bootstrapmaster.com/live/acme2/assets/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://bootstrapmaster.com/live/acme2/assets/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://bootstrapmaster.com/live/acme2/assets/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="http://bootstrapmaster.com/live/acme2/assets/ico/apple-touch-icon-57-precomposed.png">
+	<link rel="shortcut icon" href="http://bootstrapmaster.com/live/acme2/assets/ico/favicon.png">
+	<!-- end: Favicon and Touch Icons -->
+	<script src="index_data/Script.js"></script>
+		
+		
+		
+<style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style></head>
+
+<body>
+		<!-- start: Header -->
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".sidebar-nav.nav-collapse">
+				      <span class="icon-bar"></span>
+				      <span class="icon-bar"></span>
+				      <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><span>Regresión Lineal</span></a>
+								
+				<!-- start: Header Menu -->
+				<div class="nav-no-collapse header-nav">
+					<ul class="nav pull-right">
+						<li class="dropdown hidden-xs">
+							<a class="btn dropdown-toggle" data-toggle="dropdown" href="http://bootstrapmaster.com/live/acme2/index.html#">
+								<i class="halflings warning-sign white"></i>
+							</a>
+							<ul class="dropdown-menu notifications">
+								<li>
+									<span class="dropdown-menu-title">You have 11 notifications</span>
+								</li>	
+                            	<li>
+                                    <a href="http://bootstrapmaster.com/live/acme2/index.html#">
+										+ <i class="fa fa-user"></i> <span class="message">New user registration</span> <span class="time">1 min</span> 
+                                    </a>
+                                </li>
+								<li>
+                                    <a href="http://bootstrapmaster.com/live/acme2/index.html#">
+										+ <i class="fa fa-comment-o"></i> <span class="message">New comment</span> <span class="time">7 min</span> 
+                                    </a>
+                                </li>
+								<li>
+                                    <a href="http://bootstrapmaster.com/live/acme2/index.html#">
+										+ <i class="fa fa-comment-o"></i> <span class="message">New comment</span> <span class="time">8 min</span> 
+                                    </a>
+                                </li>
+								<li>
+                                    <a href="http://bootstrapmaster.com/live/acme2/index.html#">
+										+ <i class="fa fa-comment-o"></i> <span class="message">New comment</span> <span class="time">16 min</span> 
+                                    </a>
+                                </li>
+								<li>
+                                    <a href="http://bootstrapmaster.com/live/acme2/index.html#">
+										+ <i class="fa fa-user"></i> <span class="message">New user registration</span> <span class="time">36 min</span> 
+                                    </a>
+                                </li>
+								<li>
+                                    <a href="http://bootstrapmaster.com/live/acme2/index.html#">
+										+ <i class="fa fa-shopping-cart"></i> <span class="message">2 items sold</span> <span class="time">1 hour</span> 
+                                    </a>
+                                </li>
+								<li class="warning">
+                                    <a href="http://bootstrapmaster.com/live/acme2/index.html#">
+										- <i class="fa fa-user"></i> <span class="message">User deleted account</span> <span class="time">2 hour</span> 
+                                    </a>
+                                </li>
+								<li class="warning">
+                                    <a href="http://bootstrapmaster.com/live/acme2/index.html#">
+										- <i class="fa fa-shopping-cart"></i> <span class="message">Transaction was canceled</span> <span class="time">6 hour</span> 
+                                    </a>
+                                </li>
+								<li>
+                                    <a href="http://bootstrapmaster.com/live/acme2/index.html#">
+										+ <i class="fa fa-comment-o"></i> <span class="message">New comment</span> <span class="time">yesterday</span> 
+                                    </a>
+                                </li>
+								<li>
+                                    <a href="http://bootstrapmaster.com/live/acme2/index.html#">
+										+ <i class="fa fa-user"></i> <span class="message">New user registration</span> <span class="time">yesterday</span> 
+                                    </a>
+                                </li>
+                                <li>
+                            		<a class="dropdown-menu-sub-footer">View all notifications</a>
+								</li>	
+							</ul>
+						</li>
+						<!-- start: Notifications Dropdown -->
+						<li class="dropdown hidden-xs">
+							<a class="btn dropdown-toggle" data-toggle="dropdown" href="http://bootstrapmaster.com/live/acme2/index.html#">
+								<i class="halflings tasks white"></i>
+							</a>
+							<ul class="dropdown-menu tasks">
+								<li>
+									<span class="dropdown-menu-title">You have 17 tasks in progress</span>
+                            	</li>
+								<li>
+                                    <a href="http://bootstrapmaster.com/live/acme2/index.html#">
+										<span class="header">
+											<span class="title">iOS Development</span>
+											<span class="percent">80%</span>
+										</span>
+                                        <div class="taskProgress progressSlim progressBlue ui-progressbar ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80">80<div class="ui-progressbar-value ui-widget-header ui-corner-left" style="width: 80%;"></div></div> 
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://bootstrapmaster.com/live/acme2/index.html#">
+										<span class="header">
+											<span class="title">Android Development</span>
+											<span class="percent">47%</span>
+										</span>
+                                        <div class="taskProgress progressSlim progressBlue ui-progressbar ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="47">47<div class="ui-progressbar-value ui-widget-header ui-corner-left" style="width: 47%;"></div></div> 
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://bootstrapmaster.com/live/acme2/index.html#">
+										<span class="header">
+											<span class="title">Django Project For Google</span>
+											<span class="percent">32%</span>
+										</span>
+                                        <div class="taskProgress progressSlim progressBlue ui-progressbar ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="32">32<div class="ui-progressbar-value ui-widget-header ui-corner-left" style="width: 32%;"></div></div> 
+                                    </a>
+                                </li>
+								<li>
+                                    <a href="http://bootstrapmaster.com/live/acme2/index.html#">
+										<span class="header">
+											<span class="title">SEO for new sites</span>
+											<span class="percent">63%</span>
+										</span>
+                                        <div class="taskProgress progressSlim progressBlue ui-progressbar ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="63">63<div class="ui-progressbar-value ui-widget-header ui-corner-left" style="width: 63%;"></div></div> 
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://bootstrapmaster.com/live/acme2/index.html#">
+										<span class="header">
+											<span class="title">New blog posts</span>
+											<span class="percent">80%</span>
+										</span>
+                                        <div class="taskProgress progressSlim progressBlue ui-progressbar ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80">80<div class="ui-progressbar-value ui-widget-header ui-corner-left" style="width: 80%;"></div></div> 
+                                    </a>
+                                </li>
+								<li>
+                            		<a class="dropdown-menu-sub-footer">View all tasks</a>
+								</li>	
+							</ul>
+						</li>
+						<!-- end: Notifications Dropdown -->
+						<!-- start: Message Dropdown -->
+
+						<!-- end: Message Dropdown -->
+						<li>
+							<a class="btn" href="http://bootstrapmaster.com/live/acme2/index.html#">
+								<i class="halflings cog white"></i>
+							</a>
+						</li>
+						<!-- start: User Dropdown -->
+
+						<!-- end: User Dropdown -->
+					</ul>
+				</div>
+				<!-- end: Header Menu -->
+				
+			</div>
+		</div>
+	</div>
+	<!-- start: Header -->
+	
+		<div class="container">
+		<div class="row">
+
+
+			<!-- start: Main Menu
+			<div id="sidebar-left" class="col-sm-1" style="display: block;">
+				<div class="nav-collapse sidebar-nav collapse navbar-collapse bs-navbar-collapse">
+					<ul class="nav nav-tabs nav-stacked main-menu">
+						<li class="active"><a href="http://bootstrapmaster.com/live/acme2/index.html"><i class="fa fa-bar-chart-o"></i><span class="hidden-sm"> Dashboard</span></a></li>	
+						<li>
+							<a class="dropmenu" href="http://bootstrapmaster.com/live/acme2/index.html#"><i class="fa fa-eye"></i><span class="hidden-sm"> UI Features</span> <span class="badge badge-success">3</span></a>
+							<ul>
+								<li><a class="submenu" href="http://bootstrapmaster.com/live/acme2/ui-sliders-progress.html"><i class="fa fa-eye"></i><span class="hidden-sm"> Sliders &amp; Progress</span></a></li>
+								<li><a class="submenu" href="http://bootstrapmaster.com/live/acme2/ui-nestable-list.html"><i class="fa fa-eye"></i><span class="hidden-sm"> Nestable Lists</span></a></li>
+								<li><a class="submenu" href="http://bootstrapmaster.com/live/acme2/ui-elements.html"><i class="fa fa-eye"></i><span class="hidden-sm"> Elements</span></a></li>
+							</ul>
+						</li>
+						<li><a href="http://bootstrapmaster.com/live/acme2/widgets.html"><i class="fa fa-dashboard"></i><span class="hidden-sm"> Widgets</span></a></li>
+						<li>
+							<a class="dropmenu" href="http://bootstrapmaster.com/live/acme2/index.html#"><i class="fa fa-folder-o"></i><span class="hidden-sm"> Example Pages</span> <span class="badge badge-important">3</span></a>
+							<ul>
+								<li><a class="submenu" href="http://bootstrapmaster.com/live/acme2/page-infrastructure.html"><i class="fa fa-hdd-o"></i><span class="hidden-sm"> Infrastructure</span></a></li>
+								<li><a class="submenu" href="http://bootstrapmaster.com/live/acme2/page-inbox.html"><i class="fa fa-envelope"></i><span class="hidden-sm"> Inbox</span></a></li>
+								<li><a class="submenu" href="http://bootstrapmaster.com/live/acme2/page-todo.html"><i class="fa fa-tasks"></i><span class="hidden-sm"> ToDo &amp; Timeline</span></a></li>
+								<!-- Profile Page - Cooming Soone
+								<li><a class="submenu" href="page-profile.html"><i class="fa fa-male"></i><span class="hidden-sm"> User Profile</span></a></li>
+
+							</ul>	
+						</li>
+						<li>
+							<a class="dropmenu" href="http://bootstrapmaster.com/live/acme2/index.html#"><i class="fa fa-edit"></i><span class="hidden-sm"> Forms</span> <span class="badge badge-info">3</span></a>
+							<ul>
+								<li><a class="submenu" href="http://bootstrapmaster.com/live/acme2/form-elements.html"><i class="fa fa-edit"></i><span class="hidden-sm"> Form elements</span></a></li>
+								<li><a class="submenu" href="http://bootstrapmaster.com/live/acme2/form-wizard.html"><i class="fa fa-edit"></i><span class="hidden-sm"> Wizard</span></a></li>
+								<li><a class="submenu" href="http://bootstrapmaster.com/live/acme2/form-dropzone.html"><i class="fa fa-edit"></i><span class="hidden-sm"> Dropzone Upload</span></a></li>
+							</ul>
+						</li>
+						<li>
+							<a class="dropmenu" href="http://bootstrapmaster.com/live/acme2/index.html#"><i class="fa fa-list-alt"></i><span class="hidden-sm"> Charts</span> <span class="badge badge-warning">3</span></a>
+							<ul>
+								<li><a class="submenu" href="http://bootstrapmaster.com/live/acme2/charts-flot.html"><i class="fa fa-list-alt"></i><span class="hidden-sm"> Flot Charts</span></a></li>
+								<li><a class="submenu" href="http://bootstrapmaster.com/live/acme2/charts-xcharts.html"><i class="fa fa-list-alt"></i><span class="hidden-sm"> xCharts</span></a></li>
+								<li><a class="submenu" href="http://bootstrapmaster.com/live/acme2/charts-others.html"><i class="fa fa-list-alt"></i><span class="hidden-sm"> Other</span></a></li>
+							</ul>
+						
+						</li>
+						<li><a href="http://bootstrapmaster.com/live/acme2/typography.html"><i class="fa fa-font"></i><span class="hidden-sm"> Typography</span></a></li>
+						<li><a href="http://bootstrapmaster.com/live/acme2/gallery.html"><i class="fa fa-picture-o"></i><span class="hidden-sm"> Gallery</span></a></li>
+						<li><a href="http://bootstrapmaster.com/live/acme2/table.html"><i class="fa fa-align-justify"></i><span class="hidden-sm"> Tables</span></a></li>
+						<li><a href="http://bootstrapmaster.com/live/acme2/calendar.html"><i class="fa fa-calendar"></i><span class="hidden-sm"> Calendar</span></a></li>
+						<li><a href="http://bootstrapmaster.com/live/acme2/file-manager.html"><i class="fa fa-folder-open"></i><span class="hidden-sm"> File Manager</span></a></li>
+						<li>
+							<a class="dropmenu" href="http://bootstrapmaster.com/live/acme2/index.html#"><i class="fa fa-star"></i><span class="hidden-sm"> Icons</span> <span class="badge">3</span></a>
+							<ul>
+								<li><a class="submenu" href="http://bootstrapmaster.com/live/acme2/icons-halflings.html"><i class="fa fa-star"></i><span class="hidden-sm"> Halflings</span></a></li>
+								<li><a class="submenu" href="http://bootstrapmaster.com/live/acme2/icons-glyphicons-pro.html"><i class="fa fa-star"></i><span class="hidden-sm"> Glyphicons PRO</span></a></li>
+								<li><a class="submenu" href="http://bootstrapmaster.com/live/acme2/icons-filetypes.html"><i class="fa fa-star"></i><span class="hidden-sm"> Filetypes</span></a></li>
+								<li><a class="submenu" href="http://bootstrapmaster.com/live/acme2/icons-social.html"><i class="fa fa-star"></i><span class="hidden-sm"> Social</span></a></li>
+								<li><a class="submenu" href="http://bootstrapmaster.com/live/acme2/icons-font-awesome.html"><i class="fa fa-star"></i><span class="hidden-sm"> Font Awesome</span></a></li>
+							</ul>
+						</li>
+						<li><a href="http://bootstrapmaster.com/live/acme2/login.html"><i class="fa fa-lock"></i><span class="hidden-sm"> Login Page</span></a></li>
+					</ul>
+				</div>
+			</div>
+			<a id="main-menu-toggle" class="hidden-xs open"><i class="fa fa-bars"></i></a>
+			 end: Main Menu -->
+
+			
+			<!-- start: Content -->
+			<div id="content" class="col-sm-12" style="min-height: auto;">
+				<h2 class="">Modelo 70%</h2>
+				<div class="row">
+					<table id="tablita" class="table">
+						<thead class="thead-dark">
+						<tr id="encabezadoTabla">
+						</tr>
+						</thead>
+						<tbody id="cuerpito">
+						</tbody>
+					</table>
+                                        <nav aria-label="tablita" class="col-md-offset-6">
+                                            <ul class="pagination">
+                                              <li>
+                                                  <a href="#" aria-label="Previous" onclick="previous('#cuerpito')">
+                                                  <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                              </li>
+                                             
+                                              <li>
+                                                  <a href="#" aria-label="Next" onclick="next('#cuerpito')">
+                                                  <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                              </li>
+                                            </ul>
+                                        </nav>
+				</div>
+				<hr>
+				<h2>Prueba y Pronóstico 30%</h2>
+				<div class="row">
+					<table id="tablita2" class="table">
+						<thead>
+						<tr id="encabezadoTabla2">
+							
+						</tr>
+						</thead>
+						<tbody id="cuerpito2">
+						</tbody>
+					</table>
+                                        <label id="lblPorcentaje">Porcentaje de Acierto:</label>
+                                        <nav aria-label="tablita2" class="col-md-offset-6">
+                                            <ul class="pagination">
+                                              <li>
+                                                  <a href="#" aria-label="Previous" onclick="previous('#cuerpito2')">
+                                                  <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                              </li>
+                                             
+                                              <li>
+                                                  <a href="#" aria-label="Next" onclick="next('#cuerpito2')">
+                                                  <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                              </li>
+                                            </ul>
+                                        </nav>
+				</div>
+				<div class="row">
+
+                                    <input id="inFile" type="file" onchange="leerArchivo(event)"><br>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" id="txtK"/>
+                                    </div>
+                                    <button class="btn btn-default" onclick="enviarDatos()">Enviar</button>
+				
+                                </div>
+				<hr>
+
+
+                                 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <table class="table">
+              <thead>
+                  <tr id="encabezadoTabla3"></tr>
+              </thead>
+              <tbody id="cuerpito3"></tbody>
+          </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+	
+	<!-- start: JavaScript-->
+	<!--[if !IE]>-->
+
+			<script src="index_data/jquery-2.js"></script>
+
+	<!--<![endif]-->
+
+	<!--[if IE]>
+	
+		<script src="assets/js/jquery-1.11.0.min.js"></script>
+	
+	<![endif]-->
+
+	<!--[if !IE]>-->
+
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='assets/js/jquery-2.1.0.min.js'>"+"<"+"/script>");
+		</script>
+
+	<!--<![endif]-->
+
+	<!--[if IE]>
+	
+		<script type="text/javascript">
+	 	window.jQuery || document.write("<script src='assets/js/jquery-1.11.0.min.js'>"+"<"+"/script>");
+		</script>
+		
+	<![endif]-->
+	<script src="index_data/jquery-migrate-1.js"></script>
+	<script src="index_data/bootstrap.js"></script>
+	
+	
+	<!-- page scripts -->
+	<script src="index_data/jquery-ui-1.js"></script>
+	<script src="index_data/jquery_003.js"></script>
+	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="assets/js/excanvas.min.js"></script><![endif]-->
+	<script src="index_data/jquery_002.js"></script>
+	<script src="index_data/jquery_005.js"></script>
+	<script src="index_data/jquery.js"></script>
+	<script src="index_data/jquery_006.js"></script>
+	<script src="index_data/jquery_004.js"></script>
+	<script src="index_data/retina.js"></script>
+	<script src="index_data/raphael.js"></script>
+	<script src="index_data/justgage.js"></script>
+	
+	<!-- theme scripts -->
+	<script src="index_data/custom.js"></script>
+	<script src="index_data/core.js"></script>
+	
+	<!-- inline scripts related to this page -->
+	<script src="index_data/index.js"></script>
+	
+	<!-- end: JavaScript-->
+	
+
+</body></html>
