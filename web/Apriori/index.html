@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	
+	<!-- start: Meta -->
+	<meta charset="utf-8">
+	<title>Regresión Lineal</title>
+	<meta name="description" content="ACME Dashboard Bootstrap Admin Template.">
+	<meta name="author" content="Łukasz Holeczek">
+	<meta name="keyword" content="ACME, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+	<!-- end: Meta -->
+	
+	<!-- start: Mobile Specific -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- end: Mobile Specific -->
+	
+	<!-- start: CSS -->
+	<link href="index_data/bootstrap.css" rel="stylesheet">
+	<link href="index_data/style.css" rel="stylesheet">
+	<link href="index_data/retina.css" rel="stylesheet">
+	<!-- end: CSS -->
+
+	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+		<link href="assets/css/ie.css" rel="stylesheet">
+	<![endif]-->
+	
+	<!--[if IE 9]>
+		<link id="ie9style" href="assets/css/ie9.css" rel="stylesheet">
+	<![endif]-->
+	
+	<!-- start: Favicon and Touch Icons -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://bootstrapmaster.com/live/acme2/assets/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://bootstrapmaster.com/live/acme2/assets/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://bootstrapmaster.com/live/acme2/assets/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="http://bootstrapmaster.com/live/acme2/assets/ico/apple-touch-icon-57-precomposed.png">
+	<link rel="shortcut icon" href="http://bootstrapmaster.com/live/acme2/assets/ico/favicon.png">
+	<!-- end: Favicon and Touch Icons -->
+	
+        <script src="KNN/index_data/Script.js"></script>
+	<script src="index_data/Script.js"></script>	
+		
+		
+<style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style></head>
+
+    <body onload="obtenerDataSet()">
+		<!-- start: Header -->
+	<nav class="navbar navbar-inner">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                
+                <a class="navbar-brand" href="#"><span>Inicio</span></a>
+                <ul class="nav navbar-nav">
+                <li><a href="/RegresionLineal/KNN">KNN</a></li>
+                <li><a href="/RegresionLineal/Regresion">Regresión Lineal</a></li>
+                </ul>
+            </div>
+
+
+        </div>
+    </nav>
+	<!-- start: Header -->
+	
+		<div class="container">
+		<div class="row">
+                    
+	
+			<!-- start: Content -->
+                    <div id="content" class="col-sm-12" style="min-height: auto;" >
+                        <div class="row">
+                            <table class="table table-dark">
+                            <thead>
+                            <th>Transacciones</th>
+                            </thead>
+                            <tbody id="tablaTransacciones"></tbody>
+                        </table>
+                        </div>
+                        <div class="row">
+                            <label for="inputConfianza">Confianza</label>
+                            <input type="number" id="inputConfianza" value="0.9"/>
+                            <label for="inputSoporte">Soporte</label>
+                            <input type="number" id="inputSoporte" value="0.1"/>
+                            <button class="btn btn-primary" onclick="calcularAsociaciones()">Buscar Asociaciones</button>
+                        </div>
+                        
+                        
+                        <div id="asociaciones" class="row">
+                            <h2 class="display-4">Asociaciones</h2>
+                            
+                        </div>
+                        
+                        
+                            
+                    </div>
+                        
+                    
+                    
+                    
+
+
+                                
+	<!-- start: JavaScript-->
+	<!--[if !IE]>-->
+
+			<script src="index_data/jquery-2.js"></script>
+
+	<!--<![endif]-->
+
+	<!--[if IE]>
+	
+		<script src="assets/js/jquery-1.11.0.min.js"></script>
+	
+	<![endif]-->
+
+	<!--[if !IE]>-->
+
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='assets/js/jquery-2.1.0.min.js'>"+"<"+"/script>");
+		</script>
+
+	<!--<![endif]-->
+
+	<!--[if IE]>
+	
+		<script type="text/javascript">
+	 	window.jQuery || document.write("<script src='assets/js/jquery-1.11.0.min.js'>"+"<"+"/script>");
+		</script>
+		
+	<![endif]-->
+	<script src="index_data/jquery-migrate-1.js"></script>
+	<script src="index_data/bootstrap.js"></script>
+	
+	
+	<!-- page scripts -->
+	<script src="index_data/jquery-ui-1.js"></script>
+	<script src="index_data/jquery_003.js"></script>
+	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="assets/js/excanvas.min.js"></script><![endif]-->
+	<script src="index_data/jquery_002.js"></script>
+	<script src="index_data/jquery_005.js"></script>
+	<script src="index_data/jquery.js"></script>
+	<script src="index_data/jquery_006.js"></script>
+	<script src="index_data/jquery_004.js"></script>
+	<script src="index_data/retina.js"></script>
+	<script src="index_data/raphael.js"></script>
+	<script src="index_data/justgage.js"></script>
+	
+	<!-- theme scripts -->
+	<script src="index_data/custom.js"></script>
+	<script src="index_data/core.js"></script>
+	
+	<!-- inline scripts related to this page -->
+	<script src="index_data/index.js"></script>
+	
+	<!-- end: JavaScript-->
+	
+                        </div>
+                </div>
+                </div>
+</body></html>

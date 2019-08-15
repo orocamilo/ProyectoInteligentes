@@ -6,6 +6,7 @@
 
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -43,16 +46,16 @@ public class servletKNN extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-           
-            String data = (String) request.getParameterMap().get("data")[0];
+            
+//            String data = (String) request.getParameterMap().get("data")[0];
             int k = Integer.parseInt(request.getParameterMap().get("k")[0]);
-            HashMap<String,Object>[] tablaDatos = obtenerDatos(data);
-            double porcentajeEntramiento = 70;
-            int numDatosEntrenamiento = (int) Math.round(tablaDatos.length* (porcentajeEntramiento/100));
-            int numDatosPrueba = tablaDatos.length - numDatosEntrenamiento ;
-            HashMap<String,Object>[] prueba = new HashMap[numDatosPrueba];
-            HashMap<String,Object>[] entrenamiento = new HashMap[numDatosEntrenamiento];
-            obtenerRegistrosPruebaEntrenamiento(prueba, entrenamiento, tablaDatos);
+//            double porcentajeEntramiento = 70;
+            
+            HttpSession session = request.getSession(true); 
+            GestorDataSet gestor = (GestorDataSet) session.getAttribute("gestorDataSet");
+            
+            HashMap<String,Object>[] prueba = gestor.getDataTest();
+            HashMap<String,Object>[] entrenamiento = gestor.getDataModel();
             this.metodos = new clsMetodosKNN(prueba, entrenamiento);
             String pronostico[] = this.metodos.KNN(k);
             HashMap<String,Object>[][] knearest = this.metodos.getKNearestNeighbors();
@@ -72,63 +75,9 @@ public class servletKNN extends HttpServlet {
         out.print(gson.toJson(map));
     }
     
-    private void obtenerRegistrosPruebaEntrenamiento(HashMap<String,Object>[] prueba, HashMap<String,Object>[] entrenamiento, HashMap<String,Object>[] registros){
-        int j = 0;
-        int k = 0;
-        boolean[] elegidosPrueba = elegirRegistros(registros, prueba);
-        
-        for (int i = 0; i < elegidosPrueba.length; i++) {
-            if(elegidosPrueba[i]){
-                prueba[j] = registros[i];
-                j++;
-            }else{
-                entrenamiento[k] = registros[i];
-                k++;
-            }
-        }
-    }
+    
 
-    private boolean[] elegirRegistros(HashMap<String, Object>[] registros, HashMap<String, Object>[] prueba) {
-        boolean[] elegidosPrueba = new boolean[registros.length];
-        for (int i = 0; i < prueba.length; i++) {
-            int indice = (int) Math.round(Math.random()*(registros.length-1));
-            while(elegidosPrueba[indice])
-                indice = (int) Math.round(Math.random()*(registros.length-1));
-            elegidosPrueba[indice] = true;
-        }
-        return elegidosPrueba;
-    }
     
-    private HashMap<String,Object>[] obtenerDatos(String data){
-        String filas[]= data.split("\n");
-        String atributos[] = filas[0].split(",");
-        HashMap<String,Object>[] datos = new HashMap[filas.length-1];
-        for (int i = 0; i < filas.length-1; i++) {
-            datos[i] = new HashMap<>();
-            String valores[] = filas[i + 1].split(",");
-            for (int j = 0; j < valores.length; j++) {
-                String valor = valores[j].trim();
-                if(j==atributos.length-1){
-                    String atributo = atributos[atributos.length-1].trim();
-                    datos[i].put("#clase", atributo);
-                    datos[i].put(atributo, obtenerDatoTipado(valor));
-                }
-                else    
-                    datos[i].put(atributos[j], obtenerDatoTipado(valor));
-            }
-            
-        }
-        return datos;
-    }
-    
-    private Object obtenerDatoTipado(String dato){
-        try{
-            return Double.parseDouble(dato);
-        }catch(NumberFormatException ex){
-            return dato;
-        }
-        
-    }
     
     
     

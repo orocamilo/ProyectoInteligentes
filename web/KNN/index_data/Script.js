@@ -25,7 +25,7 @@ function leerArchivo(e) {
 
 function enviarDatos(){
     var k = document.getElementById("txtK").value;
-    $.post("/RegresionLineal/servletKNN",{data:contenido,k:k},mostrarContenido);
+    $.post("/RegresionLineal/servletKNN",{k:k},mostrarContenido);
     contenido = "";
 }
 
@@ -115,3 +115,25 @@ function previous(id){
         }
     }
 }
+
+
+function enviarArchivo(e){
+    e.preventDefault();
+    var data = new FormData($("#formArchivo")[0]);
+    
+    $.ajax({
+        url: "/RegresionLineal/servletArchivo",
+        type: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+        success: function(resp){
+            alert("enviado");
+        },
+        error: function(){
+            alert("falló");
+        }
+    });
+}
+
+
